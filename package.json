@@ -13,6 +13,8 @@
     "child_process": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "react-tsparticles": "^2.12.2",
+    "tsparticles-slim": "^2.12.0"
   }
 }

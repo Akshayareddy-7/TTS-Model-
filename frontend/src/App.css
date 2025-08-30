@@ -1,112 +1,380 @@
-/* Global styles */
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  text-align: center;
+/* Global styles with dark theme */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* Main container */
-.container {
-  max-width: 500px;
-  margin: 50px auto;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #0a0a0a;
+}
+
+/* Dark particle container */
+.app-container {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+/* Particle background */
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Content wrapper above particles */
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   padding: 20px;
-  background: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
+}
+
+/* Stylish centered header */
+.header {
   text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
 }
 
-/* Header */
-h1 {
-  color: #333;
-  font-size: 24px;
-  margin-bottom: 20px;
+.app-title {
+  color: #ffffff;
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(102, 126, 234, 0.3);
+  letter-spacing: -1px;
+  position: relative;
 }
 
-/* Textarea */
+.app-title::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  border-radius: 20px;
+  opacity: 0.1;
+  z-index: -1;
+  filter: blur(20px);
+}
+
+.app-title::after {
+  content: '✨';
+  position: absolute;
+  top: -20px;
+  right: -30px;
+  font-size: 1.5rem;
+  animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0.5; transform: scale(1) rotate(0deg); }
+  50% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+}
+
+/* Dark themed card with glass-morphism */
+.converter-card {
+  background: rgba(20, 20, 30, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  max-width: 650px;
+  width: 100%;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.converter-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+}
+
+.converter-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Dark themed textarea */
 .text-input {
   width: 100%;
-  height: 100px;
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  resize: none;
+  height: 140px;
+  padding: 1.5rem;
+  font-size: 1rem;
+  background: rgba(15, 15, 25, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  color: #ffffff;
+  resize: vertical;
   outline: none;
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
 }
 
 .text-input:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #667eea;
+  box-shadow: 
+    0 0 0 3px rgba(102, 126, 234, 0.2),
+    0 8px 25px rgba(102, 126, 234, 0.15);
+  background: rgba(15, 15, 25, 1);
+  transform: scale(1.02);
 }
 
-/* Convert Button */
+.text-input::placeholder {
+  color: #6b7280;
+  font-style: italic;
+}
+
+/* Futuristic convert button */
 .convert-button {
-  margin-top: 15px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  background-color: #007bff;
+  width: 100%;
+  padding: 1.2rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   border: none;
-  border-radius: 5px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
 }
 
-.convert-button:hover {
-  background-color: #0056b3;
+.convert-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s;
+}
+
+.convert-button:hover::before {
+  left: 100%;
+}
+
+.convert-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+}
+
+.convert-button:active {
+  transform: translateY(-1px);
 }
 
 .convert-button:disabled {
-  background-color: #aaa;
+  opacity: 0.6;
   cursor: not-allowed;
+  background: rgba(107, 114, 128, 0.5);
 }
 
-/* Audio player container */
-.audio-container {
-  margin-top: 20px;
-  padding: 15px;
-  background: #f8f9fa;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.convert-button.converting {
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  animation: convertingPulse 2s ease-in-out infinite;
 }
 
-/* Audio text */
-.audio-container p {
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
+@keyframes convertingPulse {
+  0% { 
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 15px 35px rgba(245, 158, 11, 0.6);
+    transform: scale(1.02);
+  }
+  100% { 
+    box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+    transform: scale(1);
+  }
 }
 
-/* Audio player */
-audio {
+/* Dark themed audio player */
+.audio-player-container {
+  margin-top: 2rem;
+  padding: 2rem;
+  background: rgba(15, 15, 25, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: slideUpDark 0.5s ease-out;
+}
+
+@keyframes slideUpDark {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.audio-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-bottom: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Enhanced dark audio player */
+.audio-player {
   width: 100%;
-  margin-top: 10px;
+  height: 50px;
   outline: none;
+  border-radius: 12px;
+  background: rgba(20, 20, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-  .container {
-      width: 90%;
-      padding: 15px;
-  }
+/* Loading spinner for dark theme */
+.converting::after {
+  content: '';
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top: 2px solid #ffffff;
+  border-radius: 50%;
+  animation: spinDark 1s linear infinite;
+}
 
-  h1 {
-      font-size: 20px;
-  }
+@keyframes spinDark {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
 
+/* Responsive Design for Dark Theme */
+@media (max-width: 768px) {
+  .content-wrapper {
+    padding: 1rem;
+  }
+  
+  .app-title {
+    font-size: 2.5rem;
+  }
+  
+  .converter-card {
+    padding: 2rem;
+    margin: 0 1rem;
+  }
+  
   .text-input {
-      font-size: 14px;
-      height: 80px;
+    height: 120px;
+    padding: 1.2rem;
+    font-size: 0.9rem;
   }
-
+  
   .convert-button {
-      font-size: 14px;
-      padding: 8px 16px;
+    font-size: 1rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title {
+    font-size: 2rem;
+    letter-spacing: 0;
+  }
+  
+  .app-title::after {
+    font-size: 1rem;
+    top: -15px;
+    right: -20px;
+  }
+  
+  .converter-card {
+    padding: 1.5rem;
+  }
+  
+  .text-input {
+    height: 100px;
+    font-size: 0.875rem;
+  }
+  
+  .convert-button {
+    font-size: 0.9rem;
+    padding: 0.9rem 1.25rem;
+  }
+}
+
+/* Focus states for dark theme accessibility */
+.convert-button:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+.text-input:focus-visible {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Accessibility - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .app-title,
+  .convert-button,
+  .text-input,
+  .converter-card {
+    animation: none;
+    transition: none;
   }
 }
