@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import "./App.css"; // Make sure CSS is already there
 import ParticleBackground from './components/ParticleBackground';
 
 function App() {
     const [text, setText] = useState("");
     const [audioUrl, setAudioUrl] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    // 🧠 Create floating particles periodically
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const particle = document.createElement("div");
+            particle.className = "particle";
+            particle.style.left = Math.random() * 100 + "%";
+            particle.style.top = Math.random() * 100 + "%";
+            particle.style.animationDelay = Math.random() * 6 + "s";
+
+            document.querySelector(".particles")?.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 6000);
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, []);
 
     const handleConvert = async () => {
         if (!text.trim()) {
@@ -13,7 +33,6 @@ function App() {
         }
 
         setLoading(true);
-
         try {
             const response = await fetch("http://localhost:5000/tts", {
                 method: "POST",
